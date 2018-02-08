@@ -27,11 +27,9 @@ public class Main {
 		final int SALIR=0;
 		
 		
-		
-		File ficha=new File("D:/ficherosJava/peliculas.txt");
-		Scanner f;
+		Pelicula peliF=new Pelicula();
 		try {
-			f = new Scanner(ficha);
+			Scanner f=peliF.crearLectorF();
 		
 
 			ArrayList<Pelicula> peliculas=new ArrayList<Pelicula>();
@@ -204,10 +202,9 @@ public class Main {
 
 	private static void guardarLista(ArrayList<Pelicula> peliculas) throws IOException {
 		// TODO Auto-generated method stub
-		FileWriter fileWriter=null;
 		
-			fileWriter =new FileWriter("D:/ficherosJava/peliculas.txt");
-			PrintWriter printWriter =new PrintWriter(fileWriter);
+		Pelicula peli=new Pelicula();
+			PrintWriter printWriter =peli.crearPWriter();
 			
 			Iterator<Pelicula> it =peliculas.iterator();
 			while (it.hasNext()){
@@ -224,7 +221,8 @@ public class Main {
 				printWriter.println(":"+formatter.format(p.getFecha_estreno()));
 				
 			}
-			fileWriter.close();
+			peli.cerrarFWriter();
+			
 		 
 		
 	}

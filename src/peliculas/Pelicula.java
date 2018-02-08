@@ -1,20 +1,27 @@
 package peliculas;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Pelicula extends Video implements Mostrator, Serializable{
+public class Pelicula extends Video implements Mostrator{
 	
-	private static final long serialVersionUID=1000;
-	
+	private String nombreFichero="C:/Users/Artola/Desktop/pelikulak.txt";	
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	private Persona director;
 	private Persona[] actores;
 	private double valoracion;
 	private Date fecha_estreno;
+	private FileWriter fileWriter;
+	private String[] razonesDeQueSeaBueno;
 	
 	public Pelicula(){
 		super();
@@ -45,6 +52,14 @@ public class Pelicula extends Video implements Mostrator, Serializable{
 	
 
 	
+	public String getNombreFichero() {
+		return nombreFichero;
+	}
+
+	public void setNombreFichero(String nombreFichero) {
+		this.nombreFichero = nombreFichero;
+	}
+
 
 	public Date getFecha_estreno() {
 		return fecha_estreno;
@@ -77,9 +92,19 @@ public class Pelicula extends Video implements Mostrator, Serializable{
 	public void setValoracion(double valoracion) {
 		this.valoracion = valoracion;
 	}
+	
+	
 		
-	public void mostrarActores(){
-		System.out.print("Actores: ");
+	public String[] getRazonesDeQueSeaBueno() {
+		return razonesDeQueSeaBueno;
+	}
+
+	public void setRazonesDeQueSeaBueno(String[] razonesDeQueSeaBueno) {
+		this.razonesDeQueSeaBueno = razonesDeQueSeaBueno;
+	}
+
+	public void mostrarActores() throws NullPointerException{
+		System.out.print("Hay "+this.getActores().length+" actores: ");
 		for (int i = 0; i < this.actores.length; i++) {
 			Persona actor=this.getActores()[i];
 			actor.mostrarPersona();
@@ -89,7 +114,7 @@ public class Pelicula extends Video implements Mostrator, Serializable{
 		}
 	}
 	
-	public void anadirActores(String[] linea){
+	public void anadirActores(String[] linea)throws ArrayIndexOutOfBoundsException{
 		Persona[] actores=new Persona[linea.length];
 		for (int i = 0; i < actores.length; i++) {
 			String[] na=linea[i].split(" ");
@@ -100,7 +125,7 @@ public class Pelicula extends Video implements Mostrator, Serializable{
 	}
 	
 	
-	public void editarPelicula() throws ParseException{
+	public void editarPelicula() throws ParseException,NumberFormatException{
 		Scanner lector=new Scanner(System.in);
 		
 		System.out.println("Nuevo titulo de la pelicula: <"+this.getTitulo()+">");
@@ -129,5 +154,85 @@ public class Pelicula extends Video implements Mostrator, Serializable{
 		
 		
 	}
+
+	public Scanner crearLectorF() throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		File f= new File(this.nombreFichero);
+		Scanner scan= new Scanner(f);
+		return scan;
+	}
+
+	public PrintWriter crearPWriter() throws IOException {
+		// TODO Auto-generated method stub
+		
+		this.fileWriter=new FileWriter(this.getNombreFichero());
+		return new PrintWriter(fileWriter);
+		
+		
+	}
+
+	public void cerrarFWriter() throws IOException {
+		// TODO Auto-generated method stub
+		this.fileWriter.close();
+	}
+	
+	
+	public Double duracionEnHoras(){
+		return (this.getDuracion()/60);
+	}
+	
+	public Double calcularValor() throws NullPointerException{
+		Double valor=this.valoracion;
+		for (int i = 0; i < this.razonesDeQueSeaBueno.length; i++) {
+			switch(this.razonesDeQueSeaBueno[i]){
+			case "director famoso":
+				valor=valor+7.5;
+				break;
+			case "actor famoso":
+				valor=valor+7.5;
+				break;
+			case "director muerto":
+				valor=valor+9;
+				break;
+			case "actor muerto":
+				valor=valor+9;
+				break;
+			case "premio importante":
+				valor=valor+8.5;
+				break;
+			case "premio normal":
+				valor=valor+3.5;
+				break;
+			}
+		}
+		return valor;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

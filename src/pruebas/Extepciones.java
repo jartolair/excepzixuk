@@ -17,6 +17,7 @@ public class Extepciones {
 	  
 	  p.setNombreFichero("NoExiste.txt");
 	  Scanner lector=p.crearLectorF();
+	  
 	}
 	
 	@Test
@@ -24,6 +25,7 @@ public class Extepciones {
 	  try {
 		  Pelicula p=new Pelicula();
 		  p.mostrarActores();
+		  
 	    fail("Se esperaba excepcion NullPointerException");
 	  } catch(NullPointerException e) {
 		  System.out.println("Ha salido por el error en Mostrar Actores");
@@ -34,8 +36,8 @@ public class Extepciones {
 		try{
 		Pelicula p=new Pelicula();
 			  p.setValoracion(5.0);
-			  String[] razones =null;
-			  p.setRazonesDeQueSeaBueno(razones);
+			  //String[] razones ={"director famoso","actor famoso"};
+			  //p.setRazonesDeQueSeaBueno(razones);
 			  
 		    Double resultadoReal=p.calcularValor();
 		    Double resultadoEsperado = 4.0;

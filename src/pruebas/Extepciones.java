@@ -31,21 +31,6 @@ public class Extepciones {
 		  System.out.println("Ha salido por el error en Mostrar Actores");
 	  }
 	}
-	@Test
-	public void testCalcularValor() {
-		try{
-		Pelicula p=new Pelicula();
-			  p.setValoracion(5.0);
-			  //String[] razones ={"director famoso","actor famoso"};
-			  //p.setRazonesDeQueSeaBueno(razones);
-			  
-		    Double resultadoReal=p.calcularValor();
-		    Double resultadoEsperado = 4.0;
-		    assertEquals(resultadoEsperado, resultadoReal, 0.01);
-		}catch (NullPointerException e) {
-			// TODO: handle exception
-			System.out.println("Ha salido por el error Calcular Valor");
-		}
-		}
+	
 
 }

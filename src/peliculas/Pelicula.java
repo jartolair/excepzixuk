@@ -21,7 +21,7 @@ public class Pelicula extends Video implements Mostrator{
 	private double valoracion;
 	private Date fecha_estreno;
 	private FileWriter fileWriter;
-	private String[] razonesDeQueSeaBueno;
+
 	
 	public Pelicula(){
 		super();
@@ -94,14 +94,7 @@ public class Pelicula extends Video implements Mostrator{
 	}
 	
 	
-		
-	public String[] getRazonesDeQueSeaBueno() {
-		return razonesDeQueSeaBueno;
-	}
 
-	public void setRazonesDeQueSeaBueno(String[] razonesDeQueSeaBueno) {
-		this.razonesDeQueSeaBueno = razonesDeQueSeaBueno;
-	}
 
 	public void mostrarActores() throws NullPointerException{
 		System.out.print("Hay "+this.getActores().length+" actores: ");
@@ -114,10 +107,10 @@ public class Pelicula extends Video implements Mostrator{
 		}
 	}
 	
-	public void anadirActores(String[] linea)throws ArrayIndexOutOfBoundsException{
-		Persona[] actores=new Persona[linea.length];
+	public void anadirActores(String[] lineaActores)throws ArrayIndexOutOfBoundsException{
+		Persona[] actores=new Persona[lineaActores.length];
 		for (int i = 0; i < actores.length; i++) {
-			String[] na=linea[i].split(" ");
+			String[] na=lineaActores[i].split(" ");
 			Persona actor=new Persona(na[0],na[1]);
 			actores[i]=actor;
 		}
@@ -181,54 +174,9 @@ public class Pelicula extends Video implements Mostrator{
 		return (this.getDuracion()/60);
 	}
 	
-	public Double calcularValor() throws NullPointerException{
-		Double valor=this.valoracion;
-		for (int i = 0; i < this.razonesDeQueSeaBueno.length; i++) {
-			switch(this.razonesDeQueSeaBueno[i]){
-			case "director famoso":
-				valor=valor+7.5;
-				break;
-			case "actor famoso":
-				valor=valor+7.5;
-				break;
-			case "director muerto":
-				valor=valor+9;
-				break;
-			case "actor muerto":
-				valor=valor+9;
-				break;
-			case "premio importante":
-				valor=valor+8.5;
-				break;
-			case "premio normal":
-				valor=valor+3.5;
-				break;
-			}
-		}
-		return valor;
-		
-	}
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	
